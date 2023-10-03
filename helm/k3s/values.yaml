@@ -11,6 +11,9 @@ vcluster:
   # Enabling syncers will impact RBAC Role and ClusterRole permissions.
   # To disable a syncer set "enabled: false".
   # See docs for details - https://www.vcluster.com/docs/architecture/synced-resources
+  coredns:
+    image: coredns/coredns:1.10.1
+
   sync:
     ingresses:
       enabled: true
@@ -34,3 +37,4 @@ vcluster:
   # standards, limit ranges and resource quotas
   isolation:
     enabled: true
+
