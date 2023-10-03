@@ -2,7 +2,7 @@ namespace:
   name: vcluster-k3s
 
 ingress:
-  enabled: true
+  enabled: false
   host: vcluster-k3s.<YOUR-DOMAIN>
   clusterIssuer: <YOUR-CLUSTER-ISSUER>
 
