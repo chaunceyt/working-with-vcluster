@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: client-a
+spec:
+  destination:
+    name: ''
+    namespace: client-a
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: helm/k3s
+    repoURL: 'https://github.com/chaunceyt/working-with-vcluster'
+    targetRevision: HEAD
+    helm:
+      parameters:
+        - name: namespace.name
+          value: client-a
+        - name: coredns.image
+          value: coredns/coredns:1.10.1
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

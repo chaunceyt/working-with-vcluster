@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: argocd-rollouts
+  namespace: argocd
+spec:
+  generators:
+  - clusters: {}
+  template:
+    metadata:
+      name: '{{name}}-argo-rollouts'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/chaunceyt/working-with-vcluster
+        targetRevision: HEAD
+        path:  manifests/argocd-rollouts
+      destination:
+        server: '{{server}}'
+        namespace: argo-rollouts
+      syncPolicy:
+        automated:
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

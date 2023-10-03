@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: argocd-infra
+  namespace: argocd
+spec:
+  generators:
+  - clusters: {}
+  template:
+    metadata:
+      name: '{{name}}-argocd'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/chaunceyt/working-with-vcluster
+        targetRevision: HEAD
+        path:  manifests/argocd
+      destination:
+        server: '{{server}}'
+        namespace: argocd
+      syncPolicy:
+        automated:
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
